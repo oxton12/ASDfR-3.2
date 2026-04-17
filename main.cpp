@@ -1,3 +1,12 @@
+//==============================================================================
+// Authors : Max Solis, Aleksei Obshatko
+// Group : ASDfR 5
+// License : LGPL open source license
+//
+// Brief : Finite State Machine code for testing hardware communication. Based
+// on the provided templates
+//==============================================================================
+
 #include <pthread.h>
 #include <sys/types.h>
 
@@ -42,4 +51,3 @@ int main(int argc, char* argv[]) {
   pthread_join(th, NULL);
   return 0;
 }
-

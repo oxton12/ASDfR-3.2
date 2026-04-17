@@ -1,3 +1,12 @@
+//==============================================================================
+// Authors : Max Solis, Aleksei Obshatko
+// Group : ASDfR 5
+// License : LGPL open source license
+//
+// Brief : Finite State Machine code for testing hardware communication. Based
+// on the provided templates
+//==============================================================================
+
 #include "FRT_test.hpp"
 
 FRTTest::FRTTest(uint write_decimator_freq, uint monitor_freq)
@@ -27,13 +36,16 @@ int FRTTest::initialising() {
 
   evl_printf("Hello from initialising\n");  // Do something
 
-  std::fill(u, u + 4, 0.0);  // Making sure that u contains only zeros
-
   // The logger has to be initialised at only once
   logger.initialise();
   // The FPGA has to be initialised at least once
   ico_io.init();
 
+  // Record the initial encoders reading in case it is not 0
+  int encLeft = sample_data.channel2;   // current reading of the left encoder
+  int encRight = sample_data.channel1;  // current reading of the right encoder
+  prevEncLeft = encLeft;
+  prevEncRight = encRight;
   return 1;
 }
 
@@ -97,6 +109,9 @@ int FRTTest::stopping() {
   logger.stop();                        // Stop logger
   evl_printf("Hello from stopping\n");  // Do something
 
+  actuate_data.pwm2 = 0;
+  actuate_data.pwm1 = 0;
+
   return 1;
 }
 
@@ -114,6 +129,10 @@ int FRTTest::pausing() {
   // harm to the physical system
 
   evl_printf("Hello from pausing\n");  // Do something
+
+  actuate_data.pwm2 = 0;
+  actuate_data.pwm1 = 0;
+
   return 1;
 }
 

@@ -1,3 +1,12 @@
+//==============================================================================
+// Authors : Max Solis, Aleksei Obshatko
+// Group : ASDfR 5
+// License : LGPL open source license
+//
+// Brief : Finite State Machine code for testing hardware communication. Based
+// on the provided templates
+//==============================================================================
+
 #ifndef FRT_TEST_HPP
 #define FRT_TEST_HPP
 
